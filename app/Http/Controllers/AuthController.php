@@ -21,7 +21,7 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('main')->plainTextToken;
-        return response(json_encode(compact('user', 'token')));
+        return response(json_encode(compact('user')))->header('Authorization', $token);
     }
 
     public function login(LoginRequest $request)
@@ -33,7 +33,8 @@ class AuthController extends Controller
         /** @var \App\Models\User */
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
-        return response(json_encode(compact('user', 'token')));
+
+        return response(json_encode(compact('user')))->header('Authorization', $token);
     }
 
     public function logout(Request $request)
