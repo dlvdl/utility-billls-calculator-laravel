@@ -10,15 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('utilization', function (Blueprint $table) {
+        Schema::create('readings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
-            $table->foreignId('tariff_id')->constrained('tariffs', 'id');
-            $table->decimal('utilized', 10, 2);
-            $table->decimal('cost', 10, 2);
+            $table->foreignId('service_id')->constrained('services', 'id');
+            $table->integer('value');
             $table->timestamps();
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8mb4';
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('utilization');
+        Schema::dropIfExists('readings');
     }
 };

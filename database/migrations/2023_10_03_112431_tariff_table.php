@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->decimal('cost', 10, 2);
+            $table->foreignId('unit_id')->constrained('units', 'id');
             $table->timestamps();
             $table->foreignId('service_id')->constrained('services', 'id');
             $table->engine = 'InnoDB';
