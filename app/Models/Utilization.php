@@ -16,5 +16,15 @@ class Utilization extends Model
         'cost'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function tariff()
+    {
+        return $this->belongsTo(Tariff::class, 'tariff_id');
+    }
+
     protected $table = 'utilization';
 }
