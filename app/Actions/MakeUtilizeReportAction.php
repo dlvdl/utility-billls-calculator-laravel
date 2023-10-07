@@ -6,7 +6,7 @@ use App\Models\Utilization;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class MakeUtilizeReport
+class MakeUtilizeReportAction
 {
     private $utilization;
     private $user;

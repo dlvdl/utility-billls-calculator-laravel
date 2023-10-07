@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Actions\CalculateUtilityBillCost;
-use App\Actions\MakeUtilizeReport;
+use App\Actions\CalculateUtilityBillCostAction;
+use App\Actions\MakeUtilizeReportAction;
 use App\Http\Requests\CalculatorRequest;
 use App\Http\Resources\UtilizationResource;
 
 class CalculatorController extends Controller
 {
-    public function calculate(CalculatorRequest $request, CalculateUtilityBillCost $calculateUtilityBillCost, MakeUtilizeReport $makeUtilizeReport)
+    public function calculate(CalculatorRequest $request, CalculateUtilityBillCostAction $calculateUtilityBillCost, MakeUtilizeReportAction $makeUtilizeReport)
     {
         $data = $request->validated();
         $calculationResult = $calculateUtilityBillCost($data);

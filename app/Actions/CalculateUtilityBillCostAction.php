@@ -3,7 +3,7 @@ namespace App\Actions;
 
 use App\Models\Tariff;
 
-class CalculateUtilityBillCost
+class CalculateUtilityBillCostAction
 {
     private $tariff;
 
