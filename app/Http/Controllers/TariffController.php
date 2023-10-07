@@ -37,7 +37,7 @@ class TariffController extends Controller
 
     public function destroy(Tariff $tariff)
     {
-        //TODO Think about delet operation. For now this can destroy all my logic.
+        //TODO Think about delete operation. For now this can destroy all my logic.
         // $tariff->delete();
         // return response('', 204);
     }
