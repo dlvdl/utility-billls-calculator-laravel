@@ -13,4 +13,9 @@ class UtilizationController extends Controller
     {
         return UtilizationResource::collection($utilization::where('user_id', Auth::id())->get());
     }
+    //TODO finsh filtering route
+    function show(Request $request, $service = null, $order = 'asc')
+    {
+        return $service . "|||" . $order;
+    }
 }

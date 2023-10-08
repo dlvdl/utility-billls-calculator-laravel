@@ -26,5 +26,10 @@ class Utilization extends Model
         return $this->belongsTo(Tariff::class, 'tariff_id');
     }
 
+    public function readings()
+    {
+        return $this->hasOne(Reading::class);
+    }
+
     protected $table = 'utilization';
 }

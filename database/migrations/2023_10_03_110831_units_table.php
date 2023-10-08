@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
         });

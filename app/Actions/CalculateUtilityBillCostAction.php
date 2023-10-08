@@ -20,6 +20,6 @@ class CalculateUtilityBillCostAction
         $utilized = $currentReadings - $previousReadings;
         $price = round($utilized * $currentTariff->cost);
 
-        return ['tariffID' => $tariffID, 'price' => $price, 'utilized' => $utilized];
+        return ['tariffID' => $tariffID, 'price' => $price, 'utilized' => $utilized, 'previousReadings' => $previousReadings, 'currentReadings' => $currentReadings];
     }
 }
