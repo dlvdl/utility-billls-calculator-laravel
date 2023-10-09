@@ -13,6 +13,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/calculator/calculate', [CalculatorController::class, 'calculate']);
     Route::apiResource('/calculator/tariffs', TariffController::class);
     Route::apiResource('/calculator/utilizations', UtilizationController::class);
-    Route::get('/calculator/utilization/{service?}/{order?}', [UtilizationController::class, 'show']);
+    Route::get('/calculator/utilization/{serviceID?}', [UtilizationController::class, 'show'])->where('service', 'exi');
     Route::post('/logout', [AuthController::class, 'logout']);
 });

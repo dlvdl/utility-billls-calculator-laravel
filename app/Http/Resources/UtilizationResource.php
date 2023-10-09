@@ -19,6 +19,7 @@ class UtilizationResource extends JsonResource
             'user' => $this->user->name,
             'user_id' => $this->user->id,
             'tariff_name' => $this->tariff->name,
+            'service_name' => $this->service(),
             'tariff_id' => $this->tariff->id,
             'utilized' => $this->utilized,
             'previous_readings' => $this->readings->previous_readings,

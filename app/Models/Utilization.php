@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Utilization extends Model
 {
@@ -29,6 +30,17 @@ class Utilization extends Model
     public function readings()
     {
         return $this->hasOne(Reading::class);
+    }
+
+    public function service()
+    {
+        $result = DB::table('utilization')
+            ->select('services.name')
+            ->join('tariffs', 'tariffs.id', '=', 'utilization.tariff_id')
+            ->join('services', 'services.id', '=', 'tariffs.service_id')
+            ->where('utilization.id', '=', $this->id)
+            ->value('name');
+        return $result;
     }
 
     protected $table = 'utilization';
