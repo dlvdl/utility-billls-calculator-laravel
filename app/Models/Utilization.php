@@ -35,11 +35,13 @@ class Utilization extends Model
     public function service()
     {
         $result = DB::table('utilization')
-            ->select('services.name')
+            ->select('services.id', 'services.name')
             ->join('tariffs', 'tariffs.id', '=', 'utilization.tariff_id')
             ->join('services', 'services.id', '=', 'tariffs.service_id')
             ->where('utilization.id', '=', $this->id)
-            ->value('name');
+            ->first();
+
+
         return $result;
     }
 

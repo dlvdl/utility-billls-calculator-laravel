@@ -16,10 +16,11 @@ class UtilizationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => $this->user->name,
+            'user_name' => $this->user->name,
             'user_id' => $this->user->id,
             'tariff_name' => $this->tariff->name,
-            'service_name' => $this->service(),
+            'service_name' => $this->service()->name,
+            'service_id' => $this->service()->id,
             'tariff_id' => $this->tariff->id,
             'utilized' => $this->utilized,
             'previous_readings' => $this->readings->previous_readings,

@@ -6,23 +6,35 @@ use Illuminate\Http\Request;
 use App\Models\Utilization;
 use App\Http\Resources\UtilizationResource;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Service;
+use App\Actions\FilterUtilizationReportsCollectionByDateAction;
+use App\Actions\FilterUtilizationReportsCollectionByServiceAction;
+use App\Actions\GetUtilizationReportsCollectionAction;
 
 class UtilizationController extends Controller
 {
-    function index(Request $request, Utilization $utilization)
+    function index(Request $request, GetUtilizationReportsCollectionAction $getUtilizationReportsCollectionAction, FilterUtilizationReportsCollectionByDateAction $filterUtilizationReportsCollectionByDateAction)
     {
-        return UtilizationResource::collection($utilization::where('user_id', Auth::id())->get());
-    }
-    //TODO finsh filtering route
-    function show(Request $request, $serviceID = null, Utilization $utilization, Service $service)
-    {
-        $result = $utilization::where('user_id', Auth::id());
-
-        if ($serviceID && $service::find($serviceID)) {
-            return UtilizationResource::collection($result->where('service_id', $serviceID));
+        $utilityReportsCollection = $getUtilizationReportsCollectionAction();
+        if ($request->has(['month', 'year'])) {
+            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('month'), $request->query('year'))->get();
         }
 
-        return UtilizationResource::collection($result);
+        return $utilityReportsCollection->get();
+    }
+
+    function show(
+        Request $request,
+        $serviceID,
+        FilterUtilizationReportsCollectionByDateAction $filterUtilizationReportsCollectionByDateAction,
+        GetUtilizationReportsCollectionAction $getUtilizationReportsCollectionAction,
+        FilterUtilizationReportsCollectionByServiceAction $filterUtilizationReportsCollectionByServiceAction
+    ) {
+        $utilityReportsCollection = $getUtilizationReportsCollectionAction();
+        $utilityReportsCollection = $filterUtilizationReportsCollectionByServiceAction($utilityReportsCollection, $serviceID);
+        if ($request->has(['month', 'year'])) {
+            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('month'), $request->query('year'))->get();
+        }
+
+        return $utilityReportsCollection->get();
     }
 }
