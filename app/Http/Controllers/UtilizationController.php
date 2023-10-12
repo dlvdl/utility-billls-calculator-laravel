@@ -15,8 +15,8 @@ class UtilizationController extends Controller
     function index(Request $request, GetUtilizationReportsCollectionAction $getUtilizationReportsCollectionAction, FilterUtilizationReportsCollectionByDateAction $filterUtilizationReportsCollectionByDateAction)
     {
         $utilityReportsCollection = $getUtilizationReportsCollectionAction();
-        if ($request->has(['month', 'year'])) {
-            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('month'), $request->query('year'))->get();
+        if ($request->has(['start', 'end'])) {
+            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('start'), $request->query('end'))->get();
         }
 
         return $utilityReportsCollection->get();
@@ -31,8 +31,8 @@ class UtilizationController extends Controller
     ) {
         $utilityReportsCollection = $getUtilizationReportsCollectionAction();
         $utilityReportsCollection = $filterUtilizationReportsCollectionByServiceAction($utilityReportsCollection, $serviceID);
-        if ($request->has(['month', 'year'])) {
-            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('month'), $request->query('year'))->get();
+        if ($request->has(['start', 'end'])) {
+            return $filterUtilizationReportsCollectionByDateAction($utilityReportsCollection, $request->query('start'), $request->query('end'))->get();
         }
 
         return $utilityReportsCollection->get();

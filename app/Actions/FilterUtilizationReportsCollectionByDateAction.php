@@ -2,23 +2,19 @@
 
 namespace App\Actions;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class FilterUtilizationReportsCollectionByDateAction
 {
-    public function __invoke($utilizationReportsCollection, $month, $year)
+    public function __invoke($utilizationReportsCollection, $start, $end)
     {
-        if (!$month) {
-            $month = date('n');
-        }
-
-        if (!$year) {
-            $year = date('Y');
-        }
+        $start_date = Carbon::createFromFormat('Y-m-d', $start);
+        $end_date = Carbon::createFromFormat('Y-m-d', $end);
 
         return $utilizationReportsCollection
-            ->whereMonth('utilization.utilization_time', $month)
-            ->whereYear('utilization.utilization_time', $year);
+            ->where('utilization.utilization_time', '>=', $start_date)
+            ->where('utilization.utilization_time', '<=', $end_date);
     }
 }
