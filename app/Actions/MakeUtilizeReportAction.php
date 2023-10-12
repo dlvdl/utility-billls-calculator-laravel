@@ -26,10 +26,18 @@ class MakeUtilizeReportAction
             'price' => $price,
             'utilized' => $utilized,
             'previousReadings' => $previousReadings,
-            'currentReadings' => $currentReadings
+            'currentReadings' => $currentReadings,
+            'utilization_date' => $utilization_date
         ] = $calculationResult;
 
-        $report = $this->utilization::create(['user_id' => Auth::user()->id, 'tariff_id' => $tariffID, 'utilized' => $utilized, 'cost' => $price]);
+        $report = $this->utilization::create([
+            'user_id' => Auth::user()->id,
+            'tariff_id' => $tariffID,
+            'utilized' => $utilized,
+            'cost' => $price,
+            'utilization_time' => $utilization_date
+        ]);
+
         $this->reading::create([
             'previous_readings' => $previousReadings,
             'current_readings' => $currentReadings,

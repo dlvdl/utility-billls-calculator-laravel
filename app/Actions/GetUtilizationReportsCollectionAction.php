@@ -21,7 +21,7 @@ class GetUtilizationReportsCollectionAction
                 'readings.previous_readings',
                 'readings.current_readings',
                 'utilization.cost',
-                'utilization.created_at'
+                'utilization.utilization_time'
             )
 
             ->join('users', 'utilization.user_id', '=', 'users.id')

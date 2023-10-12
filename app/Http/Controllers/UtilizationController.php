@@ -24,7 +24,7 @@ class UtilizationController extends Controller
 
     function show(
         Request $request,
-        $serviceID,
+        string $serviceID,
         FilterUtilizationReportsCollectionByDateAction $filterUtilizationReportsCollectionByDateAction,
         GetUtilizationReportsCollectionAction $getUtilizationReportsCollectionAction,
         FilterUtilizationReportsCollectionByServiceAction $filterUtilizationReportsCollectionByServiceAction

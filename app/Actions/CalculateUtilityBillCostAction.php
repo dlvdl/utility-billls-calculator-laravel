@@ -14,12 +14,24 @@ class CalculateUtilityBillCostAction
 
     public function __invoke($data)
     {
-        ['previousReadings' => $previousReadings, 'currentReadings' => $currentReadings, 'tariffID' => $tariffID] = $data;
-        $currentTariff = $this->tariff::where('id', $tariffID)->first();
+        [
+            'previousReadings' => $previousReadings,
+            'currentReadings' => $currentReadings,
+            'tariffID' => $tariffID,
+            'utilization_date' => $utilization_date
+        ] = $data;
 
+        $currentTariff = $this->tariff::where('id', $tariffID)->first();
         $utilized = $currentReadings - $previousReadings;
         $price = round($utilized * $currentTariff->cost);
 
-        return ['tariffID' => $tariffID, 'price' => $price, 'utilized' => $utilized, 'previousReadings' => $previousReadings, 'currentReadings' => $currentReadings];
+        return [
+            'tariffID' => $tariffID,
+            'price' => $price,
+            'utilized' => $utilized,
+            'previousReadings' => $previousReadings,
+            'currentReadings' => $currentReadings,
+            'utilization_date' => $utilization_date
+        ];
     }
 }

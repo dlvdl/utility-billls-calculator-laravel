@@ -14,7 +14,8 @@ class Utilization extends Model
         'user_id',
         'tariff_id',
         'utilized',
-        'cost'
+        'cost',
+        'utilization_time'
     ];
 
     public function user()

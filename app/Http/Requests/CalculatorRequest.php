@@ -24,7 +24,8 @@ class CalculatorRequest extends FormRequest
         return [
             'currentReadings' => 'required|numeric|min:' . $this->previousReadings,
             'previousReadings' => 'required|numeric|min:0',
-            'tariffID' => 'required|exists:tariffs,id'
+            'tariffID' => 'required|exists:tariffs,id',
+            'utilization_date' => 'required|date'
         ];
     }
 }

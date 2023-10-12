@@ -16,15 +16,14 @@ return new class extends Migration {
             $table->foreignId('tariff_id')->constrained('tariffs', 'id');
             $table->decimal('utilized', 10, 2);
             $table->decimal('cost', 10, 2);
+            $table->date('utilization_time');
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('utilization');

@@ -18,7 +18,7 @@ class FilterUtilizationReportsCollectionByDateAction
         }
 
         return $utilizationReportsCollection
-            ->whereMonth('utilization.created_at', $month)
-            ->whereYear('utilization.created_at', $year);
+            ->whereMonth('utilization.utilization_time', $month)
+            ->whereYear('utilization.utilization_time', $year);
     }
 }
